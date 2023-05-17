@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "app-test"
+version = "0.1.0"
+description = ""
+authors = ["Pandabweer ebosss03@gmail.com"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+fastapi = "^0.95.1"
+sqlalchemy = "^2.0.12"
+hikari = "^2.0.0.dev119"
+asyncpg = "^0.27.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.2.0"
+black = "^23.3.0"
+ruff = "^0.0.265"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+plugins = ["sqlalchemy.ext.mypy.plugin", "pydantic.mypy"]
+implicit_reexport = true
+
+[tool.ruff]
+target-version = "py311"
+
+# Naming rules -> https://beta.ruff.rs/docs/rules/
+select = [
+    "F", "E", "W", "C90", "I",
+    "N", "D", "UP", "ANN", "S",
+    "BLE", "FBT", "B", "A", "COM",
+    "C4", "DTZ", "EM", "ISC", "ICN",
+    "G", "PIE", "T20", "PYI", "PT",
+    "PT", "Q", "RSE", "RET", "SLF",
+    "SIM", "TID", "TCH", "INT", "ARG",
+    "PTH", "ERA", "PD", "PGH", "PL",
+    "PLC", "PLE", "PLR", "PLW", "TRY",
+    "NPY", "RUF"]
+
+# Ignoring
+# `no-blank-line-before-class` (D211) in favor of `one-blank-line-before-class` (D203)
+# `multi-line-summary-first-line` (D212) in favor of `multi-line-summary-second-line` (D213)
+# Forced module docstring (D100)
+ignore = ["D211", "D212", "D100"]

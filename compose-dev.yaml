@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  dispy:
+    container_name: dispy-dev
+    init: true
+    restart: unless-stopped
+    build: .
+    depends_on:
+      - "database-interface"
+  database-interface:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@domain.com
+      PGADMIN_DEFAULT_PASSWORD: supersecret
+      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:5050"
+    depends_on:
+      - "database"
+  database:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: supersecret
+    ports:
+      - "5432:5432"
